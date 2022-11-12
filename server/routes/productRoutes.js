@@ -17,6 +17,21 @@ router.get("/", async (req, res) => {
   }
 })
 
+router.post("/", async(req, res) => {
+  const { name, type, image, amount } = req.body
+  try {
+    const product = await Products.create({name, type, image, amount})
 
+    res.status(201).json({
+      status: "Successful",
+      product
+    })
+    }catch(err){
+      res.status(400).json({
+        status: "Failed",
+        err
+      })
+  }
+})
 
 module.exports = router
