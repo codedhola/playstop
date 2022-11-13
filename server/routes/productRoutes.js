@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const Products = require("../models/productModel")
-
+//const multerUploads = require("../config/multer")
 router.get("/", async (req, res) => {
   try{
     const products = await Products.find()
@@ -32,6 +32,11 @@ router.post("/", async(req, res) => {
         err
       })
   }
+})
+
+router.post('/upload', (req, res) => {
+  console.log('req.body :', req.body);
+  res.send("success")
 })
 
 module.exports = router
