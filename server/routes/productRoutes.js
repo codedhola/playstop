@@ -1,6 +1,9 @@
 const router = require("express").Router()
 const Products = require("../models/productModel")
-//const multerUploads = require("../config/multer")
+// const upload = require("../config/multer")
+const cloudinary = require("../config/cloudinaryConfig")
+const fs = require('fs');
+
 router.get("/", async (req, res) => {
   try{
     const products = await Products.find()
@@ -33,10 +36,35 @@ router.post("/", async(req, res) => {
       })
   }
 })
+// upload.single("image"),
+router.post('/upload', async (req, res) => {
+let { name, type, amount, image } = req.body;
+console.log(req.body)
+try {
+  if (image) {
+    const uploadedResponse = await cloudinary.uploader.upload(image, {
+      upload_preset: "online-shop",
+    });
 
-router.post('/upload', (req, res) => {
-  console.log('req.body :', req.body);
-  res.send("success")
+    if (uploadedResponse) {
+      const product = new Products({
+        name,
+        brand,
+        desc,
+        price,
+        image: uploadedResponse,
+      });
+
+      const savedProduct = await product.save();
+      res.status(200).send(savedProduct);
+    }
+  }
+} catch (error) {
+  console.log(error);
+  res.status(500).send(error.message);
+}
+
+
 })
 
 module.exports = router
