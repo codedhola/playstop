@@ -38,6 +38,7 @@ router.post("/", async(req, res) => {
 // upload.single("image"),
 router.post('/upload', upload.single("image"), async (req, res) => {
     let { name, amount, type } = req.body;
+    console.log(name, type)
     try {
       let createdProduct = await new Products({
         name,

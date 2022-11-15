@@ -1,11 +1,12 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const cors = require("cors")
 const userRoutes = require("./routes/userRoutes")
 const productRoutes = require("./routes/productRoutes")
 // const expressFile = require("express-fileupload")
 require("dotenv").config()
 const app = express()
-
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
 // app.use(expressFile({createParentPath: true}))
