@@ -2,8 +2,6 @@ const router = require("express").Router()
 const Products = require("../models/productModel")
 require("../config/cloudinaryConfig");
 const upload = require("../config/multer")
-// const cloudinary = require("../config/cloudinaryConfig")
-const fs = require('fs');
 
 router.get("/", async (req, res) => {
   try{
@@ -40,20 +38,21 @@ router.post("/", async(req, res) => {
 // upload.single("image"),
 router.post('/upload', upload.single("image"), async (req, res) => {
     let { name, amount, type } = req.body;
-    console.log(req.file)
     try {
       let createdProduct = await new Products({
         name,
         amount,
         type,
-        image: req.file.path,
-      }).save();
+        image: req.file.path
+      })
+    createdProduct.save()
+
     res.status(201).json({
       message: "Product added successfully"
-    })
+      })
     }catch (err) {
     res.status(500).json({
-    message: "Creating a product failed!",
+      message: "Creating a product failed!",
     });
     }
 })
