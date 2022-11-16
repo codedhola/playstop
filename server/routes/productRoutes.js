@@ -19,29 +19,13 @@ router.get("/", async (req, res) => {
   }
 })
 
-router.post("/", async(req, res) => {
-  const { name, type, image, amount } = req.body
-  try {
-    const product = await Products.create({name, type, image, amount})
-
-    res.status(201).json({
-      status: "Successful",
-      product
-    })
-    }catch(err){
-      res.status(400).json({
-        status: "Failed",
-        err
-      })
-  }
-})
 // upload.single("image"),
 router.post('/upload', upload.single("image"), async (req, res) => {
-    let { name, amount, type } = req.body
+    let { name, price, type } = req.body
     try {
       let createdProduct = await new Products({
         name,
-        amount,
+        price,
         type,
         image: req.file.path
       })

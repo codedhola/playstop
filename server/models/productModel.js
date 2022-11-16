@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
     default: "Gaming"
   },
   image: String,
-  amount: {
+  price: {
     type: Number
   },
   createdAt: {

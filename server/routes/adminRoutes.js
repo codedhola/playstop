@@ -1,6 +1,14 @@
 const router = require("express").Router()
 const User = require("../models/adminModel")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
+
+
+const signToken = async (id) => {
+    return jwt.sign({id: id}, process.env.JWT_SECRET)
+}
+
+
 
 router.get("/", (req, res) => {
   res.send("welcome to the project")
@@ -17,6 +25,9 @@ router.post("/register", async (req, res) => {
     password = await bcrypt.hash(password, salt);
 
     const user = await User.create({ name, email, password})
+    console.log(user)
+    const token = await signToken(user._id)
+    console.log(token)
 
     res.status(201).json({
       status: "Successful",
@@ -38,10 +49,12 @@ router.post("/login", async (req, res) => {
     const validate = await bcrypt.compare(password, user.password)
     if(!validate) return res.status(404).json({status: "Failed", message: "username or password not correct"})
 
+    const token = await signToken(user.id)
 
     res.status(200).json({
       status: "Successful",
-      message: {user: user.name, email: user.email}
+      message: {user: user.name, email: user.email},
+      token: token
     })
   }catch(err){
     res.status(400).json({
