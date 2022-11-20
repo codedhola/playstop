@@ -11,7 +11,13 @@ const productSchema = new mongoose.Schema({
     type: String,
     default: "Gaming"
   },
-  image: String,
+  description: {
+    typs: String
+  },
+  image: {
+    type: String,
+    required: [true, "please add an image for the product"]
+  },
   price: {
     type: Number
   },
