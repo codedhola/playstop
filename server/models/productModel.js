@@ -7,10 +7,6 @@ const productSchema = new mongoose.Schema({
     maxlength: 20,
     required: [true, "Please specify product"]
   },
-  type: {
-    type: String,
-    default: "Gaming"
-  },
   description: {
     typs: String
   },
