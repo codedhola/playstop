@@ -9,7 +9,7 @@ function populateProduct(data){
     <img src="${data.image}" class="card-img-top" alt="product">
     <div class="card-body">
       <h5 class="card-title">${data.name}</h5>
-      <p class="card-text">${data.type}</p>
+      <p class="card-text">${data.description}</p>
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>`
     product.appendChild(createTemp)
