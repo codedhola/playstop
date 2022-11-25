@@ -33,27 +33,22 @@
       </div>
     </nav>
     <div class="admin-form">
-        <form >
+        <form method="POST" action="http://localhost:3030/api/v1/users/register">
             <div class="mb-3">
-                <label for="name" class="form-label">Product Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="name">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" aria-describedby="name" required>
               </div>
             <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
-              <textarea type="email" class="form-control" id="description" aria-describedby="emailHelp"></textarea>
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
-              <label for="price" class="form-label">Price</label>
-              <input type="number" class="form-control" id="price">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" required>
             </div>
-            <div class="mb-3">
-                <label for="image" class="form-label">Select image</label>
-                <input class="form-control" type="file" id="image">
-              </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-  </div>
   </div>
     
     <!-- <a href="admin.html">admin</a> -->
@@ -62,15 +57,3 @@
     <script src="app.js"></script>
 </body>
 </html>
-
-
-
-<!-- <h1 class="header">playstop</h1>
-    <a href="http://localhost:3030/api/v1/products">Click to  confirm products</a>
-    <form action="http://localhost:3030/api/v1/products/upload" method="POST" enctype="multipart/form-data">
-        <input type="text" name="name" id="name">
-        <input type="text" name="description" id="type">
-        <input type="number" name="amount" id="amount">
-        <input type="file" name="image" />
-        <input type="submit" value="submit">
-    </form> -->
