@@ -21,12 +21,12 @@ router.get("/", async (req, res) => {
 
 // upload.single("image"),
 router.post('/upload', upload.single("image"), async (req, res) => {
-    let { name, price, type } = req.body
+    let { name, price, description } = req.body
     try {
       let createdProduct = await new Products({
         name,
         price,
-        type,
+        description,
         image: req.file.path
       })
     createdProduct.save()
@@ -36,7 +36,7 @@ router.post('/upload', upload.single("image"), async (req, res) => {
       })
     }catch (err) {
     res.status(500).json({
-      message: "Creating a product failed!",
+      message: err.message,
     });
     }
 })
