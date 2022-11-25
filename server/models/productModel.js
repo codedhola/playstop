@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
     required: [true, "Please specify product"]
   },
   description: {
-    typs: String
+    type: String
   },
   image: {
     type: String,
