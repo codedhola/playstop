@@ -24,3 +24,31 @@ function fetchProduct(){
 }
 
 fetchProduct()
+
+
+
+const paymentForm = document.getElementById('payment-form');
+     paymentForm.addEventListener("submit", payFincra, false);
+function payFincra(e) {
+       Fincra.initialize({
+         key: "pk_test_NjM2OTA0MjU0MGUwNjU4MmU2NTIyOTNkOjoxMjQ2NDA=",
+         amount: document.getElementById("amount").value * 1,
+         currency: "NGN",
+         customer: {
+             name: document.getElementById("name").value,
+             email: document.getElementById("email").value,
+             phoneNumber: document.getElementById("number").value,
+           },
+        //Kindly chose the bearer of the fee
+        feeBearer: "customer",
+ 
+         onClose: function () {
+           alert("Transaction was not completed, window closed.");
+         },
+         onSuccess: function (data) {
+           const reference = data.reference;
+    alert("Payment complete! Reference: " + reference);
+         },
+       });
+     }
+
