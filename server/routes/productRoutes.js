@@ -19,6 +19,23 @@ router.get("/", async (req, res) => {
   }
 })
 
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try{
+    const products = await Products.findById(id)
+
+    res.status(200).json({
+      status: "Successful",
+      products
+    });
+  }catch(err){
+    res.status(400).json({
+      status: "Failed",
+      err
+    })
+  }
+})
+
 // upload.single("image"),
 router.post('/upload', upload.single("image"), async (req, res) => {
     let { name, price, description } = req.body

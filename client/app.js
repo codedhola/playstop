@@ -6,11 +6,11 @@ function populateProduct(data){
     const createTemp = document.createElement("div")
     createTemp.className = "card mx-4 sm my-4"
     createTemp.innerHTML = `
-    <img src="${data.image}" class="card-img-top" alt="product">
+    <img src="${data.image}" class="card-img-top product-img" alt="product">
     <div class="card-body">
       <h5 class="card-title">${data.name}</h5>
-      <p class="card-text">${data.description}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <p class="card-text">${data.description} <span class="m-sm-6">$${data.price}</span></p>
+      <a href="http://127.0.0.1:5500/client/checkout.html?=${data._id}" class="btn btn-primary">Buy now</a>
     </div>`
     product.appendChild(createTemp)
     console.log(createTemp)
