@@ -1,8 +1,22 @@
 const router = require("express").Router()
 const Products = require("../models/productModel")
+const { Fincra } = require('fincra-node-sdk');
 require("../config/cloudinaryConfig");
 const upload = require("../config/multer")
-const sdk = require('api')('@fincra-api/v1.0#1nakcfep1ll988yi92');
+const data = require("../utils/virtualAccount")
+
+
+const fincra = new Fincra(process.env.PUBLIC_KEY, process.env.PRIVATE_KEY, { sandbox: true });
+
+async function createVirtual(){
+  try{
+    const createVirtual = await fincra.virtualAccount.createVirtualAccount(data);
+
+  }catch(err){
+    console.log(err)
+  }
+}
+createVirtual()
 
 router.get("/", async (req, res) => {
   try{
@@ -63,14 +77,10 @@ router.post('/upload', upload.single("image"), async (req, res) => {
 // CHECKOUT SESSION
 router.post("/checkout", async (req, res) => {
 
-  const id = req.query.id
-  console.log(id)
-  sdk.createTemporaryVirtualAccount({expiresAt: '30', amount: '900'})
-    .then(({ data }) => console.log(data))
-    .catch(err => console.error(err));
+
   res.status(200).json({
-    success: "success",
-    message: id
+    success: true,
+    message: "Transaction in progress"
   })
 })
 
